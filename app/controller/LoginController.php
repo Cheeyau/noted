@@ -8,6 +8,6 @@
             $infoData = [
                 
             ];
-            $this->view('index', $infoData);
+            $this->view('login', $infoData);
         }
     }

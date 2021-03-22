@@ -9,8 +9,8 @@
             //print_r($this->getUrl());
             $url = $this->getUrl();
             // Look in BLL for first value
-            if (isset($url[1])) {
-                if(file_exists('../controller/' . ucwords($url[0]) . '.php')){
+            if (isset($url[0])) {
+                if(file_exists('../app/controller/' . ucwords($url[0]) . '.php')) {
                     // If exists, set as controller
                     $this->currentControll = ucwords($url[0]);
                     // Unset 0 Index
@@ -18,13 +18,13 @@
                 }
             }
             // Require the controller
-            require_once '../controller/' . $this->currentControll . '.php';
+            require_once '../app/controller/' . $this->currentControll . '.php';
             // Instantiate controller class
             $this->currentControll = new $this->currentControll;
             // Check for second part of url
-            if(isset($url[1])){
+            if(isset($url[1])) {
                 // Check to see if method exists in controller 
-                if(method_exists($this->currentControll, $url[1])){
+                if(method_exists($this->currentControll, $url[1])) {
                     $this->currentMethod = $url[1];
                     // Unset 1 index
                     unset($url[1]);
@@ -37,8 +37,8 @@
         }
 
         // sanitize url and remove special characters 
-        public function getUrl(){
-            if(isset($_GET['url'])){
+        public function getUrl() {
+            if(isset($_GET['url'])) {
             $url = rtrim($_GET['url'], '/');
             $url = filter_var($url, FILTER_SANITIZE_URL);
             $url = explode('/', $url);

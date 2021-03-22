@@ -13,8 +13,8 @@ class AutoLoader {
     // load view and data for in the view
     public function view($nameView, $infoData = []) {
 
-        if (file_exists('../view/pages/' . $nameView . '.php')) {
-            require_once '../view/pages/' . $nameView . '.php';
+        if (file_exists('../app/view/pages/' . $nameView . '.php')) {
+            require_once '../app/view/pages/' . $nameView . '.php';
         } else {
              die("404 - The view has not been found yet");
         }
