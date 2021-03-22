@@ -1,3 +1,3 @@
 <?php
-    //require core
-    require_once '/app/core/Core.php';
+    //require files
+    require_once '../app/require.php';
