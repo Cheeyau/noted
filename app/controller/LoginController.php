@@ -5,9 +5,19 @@
         }
         
         public function index() {
+            require_once APPROOT . '../lib/sessionLogin.php';
             $infoData = [
-                
+                'userId' => '', 'userPass' => '', 'userEmail' => '', 'userRoll' => '', 'userSalt' => '', 'errorMess' => ''
             ];
             $this->view('login', $infoData);
+        }
+
+        public function getUser() {
+            if (is_null()) {
+                $users = $this->loginModel->getUsers;
+                return true;
+            } else {
+                return false;
+            }
         }
     }

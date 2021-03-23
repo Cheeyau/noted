@@ -69,11 +69,11 @@ class Database
         $this->statement->bindValue($parameter, $value, $type);
     }
 
-    function validateDate($date, $format = 'Y-m-d H:i:s')
+    // bind datetime as string
+    function validateDate($parameter, $date, $type, $format = 'Y-m-d H:i:s')
     {
         $d = DateTime::createFromFormat($format, $date);
-        return $d && $d->format($format) == $date;
-        
+        $this->statement->bindValue($parameter, $d && $d->format($format) == $date, $type);
     }
 
     //Execute the prepared statement

@@ -8,9 +8,18 @@
 
         // initiate user view with data
         public function index() {
-            // $infoData = [
+            $infoData = [
                 
-            // ];
+            ];
             $this->view('index', $infoData);
+        }
+        
+        public function getUser() {
+            if (true) {
+                $users = $this->userModel->getUser;
+                return true;
+            } else {
+                return false;
+            }
         }
     }
