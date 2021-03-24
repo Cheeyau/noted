@@ -1,19 +1,17 @@
 <?php
 
-    class Core {
+    class Url {
         protected $currentControll = 'LoginController';
-        protected $currentMethod = 'index';
+        protected $currentMethod = 'login';
         protected $params = [];
 
         public function __construct(){
-            //print_r($this->getUrl());
             $url = $this->getUrl();
             // Look in BLL for first value
-            if (isset($url[0])) {
-                if(file_exists('../app/controller/' . ucwords($url[0]) . '.php')) {
-                    // If exists, set as controller
-                    $this->currentControll = ucwords($url[0]);
-                    // Unset 0 Index
+            if (isset($url)) {
+                $controllerName = ucwords($url[0]);
+                if(file_exists('../app/controllers/' . $controllerName . '.php')) {
+                    $this->currentController = $controllerName;
                     unset($url[0]);
                 }
             }

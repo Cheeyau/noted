@@ -6,31 +6,22 @@
             $this->db = new Database;
         }
         
-        public function check_login($username, $password){
-            $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-            $query = $this->connection->query($sql);
-            if($query->num_rows > 0){
-                $row = $query->fetch_array();
-                return $row['id'];
+        // verify password with db
+        public function checkLoginModel(string $userName, string $password){
+            $this->db->query("SELECT * FROM `user` WHERE `name` = :userName;");
+            $this->db->bindString(':userName', $userName);
+            $row = $this->db->single();
+            if($this->db->rowCount() > 0){
+                $tempPassword = hash('sha256', $password.$row->Salt);
+                if (password_verify($tempPassword, $row->Password)) {
+                    return $row;
+                } else {
+                    return false;
+                }
             }
-            else{
+            else {
                 return false;
             }
         }
-     
-        public function details($sql){
-     
-            $query = $this->connection->query($sql);
-     
-            $row = $query->fetch_array();
-     
-            return $row;       
-        }
-     
-        public function escape_string($value){
-     
-            return $this->connection->real_escape_string($value);
-        }
-
         
     }
