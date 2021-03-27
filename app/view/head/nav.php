@@ -1,21 +1,37 @@
+
 <nav>
     <ul>
-        <li><a id="home" href="<?php echo URLROOT ?>/pages/dashboard">Home</a></li>
-        <li><a id="notes" href="<?php echo URLROOT ?>/pages/note">Notes</a></li> 
-        <li><a id="notes" href="<?php echo URLROOT ?>/pages/login">login</a></li> 
-        <?php
-        if (isset($_SESSION['userId'])) {
-            if ($_SESSION['userId'] == 1 || $_SESSION['userId'] == 2) {
-                echo "<li>";
-                echo "<a href=" .  URLROOT . '/pages/users'. ">Users";
-                echo "</a>";
-                echo "</li>";
+        <?php 
+            // check if use login for redirect to login
+            if(!isset($_SESSION['userId'])) {
+                echo '</li><h1 class="row col-sm-6"><a href="';
+                echo URLROOT . '/LoginController/login';
+                echo '">Noted!</a></h1></li>';
             }
-        }
-        echo '<form action="' . URLROOT . '/lib/sessionLogout" method="POST">';
-        echo '<li type="submit" name="submit">log out</li>';
-        echo "</form>";      
-        
-        ?>
+            // check if use login for redirect to dashboard
+            if(isset($_SESSION['userId'])) {
+                echo '<li><a href="';
+                echo URLROOT . '/IndexController/index';
+                echo '">Noted!</a></li>';
+                
+                echo '<li><a href="';
+                echo URLROOT . '/NoteController/index';
+                echo '">Notes</a></li>';
+                
+                // check if use login us admin
+                if (isset($_SESSION['userRoll'])) {
+                    if ($_SESSION['userRoll'] == 1 || $_SESSION['userRoll'] == 2) {
+                        echo '<li><a href="';
+                        echo URLROOT . '/pages/users'. '">Users';
+                        echo "</a></li>";
+                    }
+                }
+                
+                // logout button
+                echo "<li><form action=";
+                echo URLROOT . '/LoginController/logout method="POST">';
+                echo '<button type="submit" name="submit">Log out</button></form></li>';
+            }
+        ?> 
     </ul>
 </nav>

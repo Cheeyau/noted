@@ -3,8 +3,6 @@
 class AutoLoader {
     //load model and view
     public function model($incModel) {
-        // Require model file else error message 
-        
         require_once '../app/model/'. $incModel . '.php';
         // initiate model 
         return new $incModel;
@@ -12,11 +10,10 @@ class AutoLoader {
 
     // load view and data for in the view
     public function view($nameView, $infoData = []) {
-
         if (file_exists('../app/view/' . $nameView . '.php')) {
             require_once '../app/view/' . $nameView . '.php';
         } else {
-             die("404 - The view has not been found yet");
+             die("404 - The view has not been found yet ". $nameView );
         }
     }
 }

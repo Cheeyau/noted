@@ -11,7 +11,7 @@
             $infoData = [
                 
             ];
-            $this->view('index', $infoData);
+            $this->view('pages/index', $infoData);
         }
         
         public function getUser() {

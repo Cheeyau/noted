@@ -1,20 +1,10 @@
 @font-face {
-    font-family: "freeScrpt";
-    src: url("../fonts/FREESCPT.woff2") format("woff2");
+    font-family: "comic";
+    src: url("");
   }
-  
-  @font-face {
-    font-family: "gothamMedium";
-    src: url("../fonts/GothamRnd-Medium.otf") format("opentype");
-  }
-  
-  @font-face {
-    font-family: "gothamBold";
-    src: url("../fonts/GothamRnd-Bold.otf") format("opentype");
-    font-weight: bold;
-  }
+
   :root {
-    --body:gothamMedium;
+    --body:comic;
     --gotB:gothamBold;
   }
   
@@ -48,7 +38,7 @@
   a {
     margin: 0;
     padding: 0;
-    font-style: none;
+    text-decoration: none;
   }
   
   img {

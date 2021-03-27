@@ -8,7 +8,7 @@
             $infoData = [
                 
             ];
-            $this->view('note', $infoData);
+            $this->view('/pages/note', $infoData);
         }
 
         public function getNotes() {

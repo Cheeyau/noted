@@ -1,9 +1,5 @@
 <?php
-        require APPROOT . '/view/head/head.php';
-        require APPROOT . '/view/head/nav.php';
-        echo 'hello dashboard';
-    // if(isLogin()) {
-    // } else {
-    // }
-    // header('location: ' . URLROOT . '/pages/login');
-    
+    require APPROOT . '/view/head/head.php';
+    require APPROOT . '/view/head/nav.php';
+    ?>
+    <h1>Good to see you back, <?php echo $_SESSION["userName"] ?>!</h1>
