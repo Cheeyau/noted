@@ -5,9 +5,12 @@
         }
         
         public function index() {
-            $infoData = [
-                
-            ];
-            $this->view('pages/dashboard', $infoData);
+            if(isset($_SESSION['userId'])) {
+                $infoData = [];
+                $this->view('pages/dashboard', $infoData);
+            } else {
+                header('location: ' . URLROOT . '/LoginController/login');
+                exit();
+            }
         }
     }

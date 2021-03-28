@@ -1,6 +1,7 @@
 <?php
-    require_once APPROOT . '/view/head/head.php';
-    require_once APPROOT . '/view/head/nav.php';
+    require APPROOT . '/view/head/head.php';
+    require APPROOT . '/view/head/captchaHead.php';
+    require APPROOT . '/view/head/nav.php';
 ?>
 
 <main class="container align-self-center ">    
@@ -19,6 +20,5 @@
         <button class="row " type="submit" value="submit">Register</button>
         
         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-    </form>
+    </form>    
 </main>
-

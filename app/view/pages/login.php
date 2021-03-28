@@ -1,5 +1,6 @@
 <?php
     require APPROOT . '/view/head/head.php';
+    require_once APPROOT . '/view/head/captchaHead.php';
     require APPROOT . '/view/head/nav.php';
 ?>
 <main class="container align-self-center ">    
@@ -11,6 +12,8 @@
         <input class="row " type="password" name="userPassword" id="inputPassword">
         <button class="row " type="submit" value="submit">Login</button>
         <span class="error " ><?php echo $infoData['errorMess'] ?></span>
+        
+        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
     </form>
     <button type="button">
         <a href="<?php echo URLROOT ?>/LoginController/registerUserPage">Don't have an account? Create one here!</a>
