@@ -58,7 +58,7 @@
             }
         }
         // hash password and salt with sha512
-        private function hashPassword(string $passwordAndSalt) {
+        public function hashPassword(string $passwordAndSalt) {
             return hash('sha512', $passwordAndSalt);
         }
         // check if mail is already used

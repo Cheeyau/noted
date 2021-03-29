@@ -18,7 +18,7 @@
             ];
             return $infoData;
         }
-        // Update note by 
+        // Update note by id
         public function updateNoteCon() {
             $infoData = $this->emptyData();
             if (isset($_GET['action'])) {
