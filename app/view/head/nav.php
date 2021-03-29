@@ -26,7 +26,10 @@
                         echo "</a></li>";
                     }
                 }
-                
+                echo '<li><a href="';
+                echo URLROOT . '/UserController/editUser">';
+                echo $_SESSION['userName'].'</a></li>';
+
                 // logout button
                 echo "<li><form action=";
                 echo URLROOT . '/LoginController/logout method="POST">';

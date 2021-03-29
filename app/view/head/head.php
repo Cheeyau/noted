@@ -11,5 +11,8 @@
         <!-- site -->
         <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/normalizer.css">
         <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/style.css">
-        <script href="<?php echo URLROOT ?>/public/js/script.js"></script>
+        <script src="<?php echo URLROOT ?>/public/js/script.js"></script>
+        <!-- JQuery -->
+        <script data-require="jquery@2.1.4" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="<?php echo URLROOT ?>/public/js/jquery.ns-autogrow-1.1.6/dist/jquery.ns-autogrow.min.js"></script>
     </head>

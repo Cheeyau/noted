@@ -7,7 +7,7 @@
     <p class="row col-sm-6 align-self-center">Please fill in the credential to receive a link to reset your password.</p>
     <form id="registerUser" class="row col-sm-6 align-self-center" action="<?php echo URLROOT ?>/LoginController/resetPassword" method="POST">
         <label class="row " for="inputMail">Email: </label>
-        <input class="row " type="text" name="userEmail" id="inputPassword">
+        <input class="row " type="text" name="inputPassword" id="inputPassword">
         
         <span class="error " ><?php echo $infoData["errorMess"] ?></span>
         <button class="row " type="submit" value="submit">send</button>

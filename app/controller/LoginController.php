@@ -1,4 +1,5 @@
 <?php 
+    require_once APPROOT . '/lib/mailer.php';    
     class LoginController extends AutoLoader {
         public function __construct() {
             $this->loginModel = $this->model('LoginModel');
@@ -20,16 +21,13 @@
             $infoData = $this->emptyData();
             $this->view('/pages/registerUser', $infoData);
         }
-        
+        // Empty array 
         private function emptyData() {
             $infoData = [
                 'userId' => '', 'userName' => '', 'userPass' => '', 'userEmail' => '', 'userRoll' => '', 'userSalt' => '', 'errorMess' => ''
             ];
             return $infoData;
         }
-        
-        // log out us
-
         // log out user
         public function logout() {
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -45,7 +43,6 @@
                 } 
             }
         }
-
         // login validation
         public function login() {
             $infoData = $this->emptyData();
@@ -207,7 +204,6 @@
     }
     // send reset link by mail
     public function resetPassword() {
-        require_once APPROOT . '/lib/mailer.php';
         $infoData = $this->emptyData();
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
             $recaptchaCheck = checkRecaptcha($_POST['recaptcha_response']);
@@ -225,13 +221,19 @@
                             $infoData['userEmail'] = trim($_POST['userEmail']);
                             $token = random_bytes(32);
 
+
+
+
+
+
+
                             $tempResponse = $this->loginModel->updateUserTokenModel($infoData['userEmail'], $token);
                             if($tempResponse === true) {
                                 $url = sprintf( APPROOT . '/pages/resetPassword', http_build_query([
                                     'validator' => bin2hex($token)
                                 ]));
                                 $mail = new Mailer();
-                                $mail->SendMail();
+                                // $mail->SendMail();
                                 $infoData['errorMess'] = "The reset link has been send to the email that is filled in.";
                             } else {
                                 $infoData['errorMess'] = "The email address does not exist.";
@@ -247,7 +249,7 @@
     } 
 
     private function mailBody() {
-        
+
     }
 
     public function confirmPasswordReset() {

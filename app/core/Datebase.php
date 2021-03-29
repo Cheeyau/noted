@@ -30,50 +30,42 @@ class Database
     }
 
     // Bind Int
-    public function bindInt($parameter, $value) {
-        if (is_int($value)) {
+    public function bindInt($parameter, int $int) {
+        if (is_int($int)) {
             $type = PDO::PARAM_INT;
         }
-        $this->statement->bindValue($parameter, $value, $type);
+        $this->statement->bindValue($parameter, $int, $type);
     }
     
     // Bind bool
-    public function bindBool($parameter, $value) {
-        if (is_bool($value)) {
+    public function bindBool($parameter, bool $bool) {
+        if (is_bool($bool)) {
             $type = PDO::PARAM_BOOL;
         }
-        $this->statement->bindValue($parameter, $value, $type);
+        $this->statement->bindValue($parameter, $bool, $type);
     }
     
     // Bind string
-    public function bindString($parameter, $value) {
-        if (is_string($value)) {
+    public function bindString($parameter, string $string) {
+        if (is_string($string)) {
             $type = PDO::PARAM_STR;
         }
-        $this->statement->bindValue($parameter, $value, $type);
+        $this->statement->bindValue($parameter, $string, $type);
     }
     
     // Bind null
-    public function bindNull($parameter, $value) {
-        if (is_null($value)) {
-            $type = PDO::PARAM_STR;
+    public function bindNull($parameter, $null) {
+        if (is_null($null)) {
+            $type = PDO::PARAM_NULL;
         }
-        $this->statement->bindValue($parameter, $value, $type);
+        $this->statement->bindValue($parameter, $null, $type);
     }
-    
-    // Bind dateTime
-    public function bindDateTime($parameter, $value) {
-        if (is_null($value)) {
-            $type = PDO::PARAM_STR;
-        }
-        $this->statement->bindValue($parameter, $value, $type);
-    }
-
     // bind datetime as string
-    function validateDate($parameter, $date, $type, $format = 'Y-m-d H:i:s')
-    {
-        $d = DateTime::createFromFormat($format, $date);
-        $this->statement->bindValue($parameter, $d && $d->format($format) == $date, $type);
+    function bindDateTime($parameter, string $date) {
+        if (is_string($date)) {
+            $type = PDO::PARAM_STR;
+        }
+        $this->statement->bindValue($parameter, $date, $type);
     }
 
     //Execute the prepared statement
@@ -83,6 +75,12 @@ class Database
 
     //Return an array
     public function resultSet() {
+        $this->execute();
+        return $this->statement->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    // Return notes of userid
+    public function resultSetNotes() {
         $this->execute();
         return $this->statement->fetchAll(PDO::FETCH_OBJ);
     }

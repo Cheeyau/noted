@@ -3,7 +3,7 @@ require APPROOT . '/view/head/head.php';
 ?>
 <main class="container align-self-center ">    
     <h1 class="row col-sm-6">Noted!</h1>
-    <p class="row col-sm-6 align-self-center">Please fill in the credential to log in.</p>
+    <p class="row col-sm-6 align-self-center">Here can you change you personal information.</p>
     <form class="col-sm-6 align-self-center" action="<?php echo URLROOT ?>/LoginController/login" method="POST">
         <label class="row " for="inputUser">User: </label>
         <input class="row " type="text" name="userName" id="inputUser">
@@ -11,11 +11,6 @@ require APPROOT . '/view/head/head.php';
         <input class="row " type="password" name="userPassword" id="inputPassword">
         <button class="row " type="submit" value="submit">Login</button>
         <span class="error " ><?php echo $infoData['errorMess'] ?></span>
-        <button type="button">
-            <a href="<?php echo URLROOT ?>/pages/resetPassword">Don't have an account? Create one here!</a>
-        </button>
-        <button type="button">
-            <a href="<?php echo URLROOT ?>/pages/registerUser">Forgot your password? Reset it here!</a>
-        </button>
+        
     </form>
 </main>

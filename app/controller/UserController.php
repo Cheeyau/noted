@@ -16,10 +16,15 @@
         
         public function getUser() {
             if (true) {
-                $users = $this->userModel->getUser;
+                $users = $this->userModel->getUser();
                 return true;
             } else {
                 return false;
             }
+        }
+        
+        public function editUser() {
+            $infoData = [];
+            $this->view('pages/editUser', $infoData);
         }
     }
