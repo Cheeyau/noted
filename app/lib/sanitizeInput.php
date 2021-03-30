@@ -20,7 +20,7 @@
     }
     
     // Sanitize string
-    function filterString($field){
+    function filterString(string $field){
         $field = filter_var(trim($field), FILTER_SANITIZE_STRING);
         if(!empty($field)) {
             return $field;

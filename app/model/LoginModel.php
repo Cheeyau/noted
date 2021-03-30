@@ -25,16 +25,18 @@
         // bind and insert into db new user
         public function registerUserModel(string $userName, string $userEmail, string $password, string $salt, int $userRoll = 0) {
             if($this->checkEmail($userEmail)) {
+                $tempDate = new DateTime();
                 $tempHash = $this->hashPassword($password.$salt);
                 $this->db->query(
-                    "INSERT INTO `User` (`Name`, `EmailAddress`, `Password`, `Salt`, `UserRoll`) 
-                    VALUES (:userName, :userEmail, :userPassword, :userSalt, :userRoll);
+                    "INSERT INTO `User` (`Name`, `EmailAddress`, `Password`, `Salt`, `UserRoll`, `Registration`) 
+                    VALUES (:userName, :userEmail, :userPassword, :userSalt, :userRoll, :createDate);
                         ");
                 $this->db->bindString(':userName', $userName);
                 $this->db->bindString(':userEmail', $userEmail);
                 $this->db->bindString(':userPassword', $tempHash);
                 $this->db->bindString(':userSalt', $salt);
                 $this->db->bindInt(':userRoll', $userRoll);
+                $this->db->bindDateTime(':createDate', $tempDate->format('Y-m-d H:i:s'));
                 if($this->db->execute()) {
                     $tempUser = $this->getUserFromDb($userName, $userEmail);
                     return $tempUser;
@@ -42,7 +44,7 @@
                     return false;
                 }
             } else {
-
+                false;
             }
         }
         // return user from db 

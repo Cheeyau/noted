@@ -15,33 +15,6 @@
     padding: 0;
   }
   
-  h3 {
-    margin: 0;
-    padding: 0;
-  }
-  
-  
-  h4 {
-    margin: 0;
-    padding: 0;
-  }
-  
-  h2 {
-    margin: 0;
-    padding: 0;
-  }
-  
-  a {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-  }
-  
-  img {
-    width: auto;
-    height: auto;
-  }
-
 .note {
   flex-wrap: wrap;
   margin: 12px;
@@ -82,4 +55,24 @@
 .noteStamp {
   font-size: .5em;
   font-style: italic;
+}
+
+.searchBar {
+  margin: 12px;
+}
+
+.searchBar label {
+  margin: 0 12px;
+}
+
+.searchBar input {
+  margin: 0 12px;
+}
+
+.searchDate {
+  max-width: 30px;
+}
+
+.searchDateYear {
+  max-width: 50px;
 }

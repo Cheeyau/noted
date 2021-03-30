@@ -22,7 +22,7 @@
                 if (isset($_SESSION['userRoll'])) {
                     if ($_SESSION['userRoll'] == 1 || $_SESSION['userRoll'] == 2) {
                         echo '<li><a href="';
-                        echo URLROOT . '/pages/users'. '">Users';
+                        echo URLROOT . '/UserController/getUserCon'. '">Users';
                         echo "</a></li>";
                     }
                 }

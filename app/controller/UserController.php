@@ -8,19 +8,14 @@
 
         // initiate user view with data
         public function index() {
-            $infoData = [
-                
-            ];
+            $infoData = [];
             $this->view('pages/index', $infoData);
         }
         
-        public function getUser() {
-            if (true) {
-                $users = $this->userModel->getUser();
-                return true;
-            } else {
-                return false;
-            }
+        public function getUserCon() {
+            $users = $this->userModel->getUsersModel();
+            $infoData = ['users' => $users, 'errorMess' =>''];
+            $this->view('/pages/users', $infoData);
         }
         
         public function editUser() {
@@ -86,5 +81,71 @@
         // hash password and salt with sha512
         public function hashPassword(string $passwordAndSalt) {
             return hash('sha512', $passwordAndSalt);
+        }
+
+        public function searchUserCon() {
+            $infoData = [ 'users' => '', 'errorMess'=> ''];
+            if($_SERVER['REQUEST_METHOD'] === 'GET') { 
+                if(
+                    !empty($_GET['inputDay']) && 
+                    !empty($_GET['inputDay']) && 
+                    !empty($_GET['inputYear']) 
+                    ) {
+                    $tempMonth = str_pad($_GET['inputMonth'], 2, "0", STR_PAD_LEFT);
+                    $tempDay = str_pad($_GET['inputDay'], 2, "0", STR_PAD_LEFT);
+                    $tempDate = $_GET['inputYear'] . '-' . $tempMonth . '-' . $tempDay;
+                    $tempDate = filterString($tempDate);
+                    if($tempDate === false) {
+                        $infoData['errorMess'] = "Please enter a valid date.";
+                    } else {
+                        $infoData['users'] = $this->userModel->searchUserRegistrationModel($tempDate);
+                        if($infoData['users'] === false) {
+                            $infoData['errorMess'] = 'There are no users found.';
+                            $infoData['users'] = '';
+                        }
+                    }
+                }
+                if(
+                    !empty($_GET['inputName']) &&
+                    empty($_GET['inputDay']) && 
+                    empty($_GET['inputDay']) && 
+                    empty($_GET['inputYear']) &&
+                    empty($_GET['inputEmail'])
+                ) {
+                    $tempName = $_GET['inputName'];
+                    $tempName = filterString($tempName);
+                    if($tempName === false) {
+                        $infoData['errorMess'] = "Please enter a valid name.";
+                    } else {
+                        $infoData['users'] = $this->userModel->searchUserNameModel($tempName);
+                        if($infoData['users'] === false) {
+                            $infoData['errorMess'] = 'There are no users found.';
+                            $infoData['users'] = '';
+                        }
+                    }
+                }
+                if(
+                    !empty($_GET['inputEmail']) && 
+                    empty($_GET['inputDay']) && 
+                    empty($_GET['inputDay']) && 
+                    empty($_GET['inputYear']) &&
+                    empty($_GET['inputName'])
+                ) {
+                    $tempEmail = $_GET['inputEmail'];
+                    $tempEmail = filterString($tempEmail);
+                    if($tempEmail === false) {
+                        $infoData['errorMess'] = "Please enter a valid Email.";
+                    } else {
+                        $infoData['users'] = $this->userModel->searchUserEmailModel($tempEmail);
+                        if($infoData['users'] === false) {
+                            $infoData['errorMess'] = 'There are no users found.';
+                            $infoData['users'] = '';
+                        }
+                    }
+                }
+                
+             }
+            
+            $this->view('/pages/users', $infoData);
         }
     }
