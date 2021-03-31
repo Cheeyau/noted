@@ -1,8 +1,9 @@
 <?php
 require APPROOT . '/view/head/head.php';
 require APPROOT . '/view/head/nav.php';
-function determineRoll($infoData) {
-    switch($infoData['userRoll']) {
+// show user roll 
+function determineRoll($data) {
+    switch($data['userRoll']) {
         case 0:
             echo 'User';
             break;
@@ -26,11 +27,11 @@ function determineRoll($infoData) {
             <p>User Roll:</p>
         </section>
         <section class="col-sm-6">
-            <p><?php echo $infoData['userName']?></p>
-            <p><?php echo $infoData['userEmail']?></p>
+            <p><?php echo $data['userName']?></p>
+            <p><?php echo $data['userEmail']?></p>
             <p>
                 <?php 
-                    determineRoll($infoData);
+                    determineRoll($data);
                 ?>
             </p>
         </section>
@@ -48,7 +49,7 @@ function determineRoll($infoData) {
         <input class="row " type="password" name="inputPassword" id="inputPassword">
         
         <button class="row " type="submit" value="submit">Save changes</button>
-        <span class="error " ><?php echo $infoData['errorMess'] ?></span>
+        <span class="error " ><?php echo $data['errorMess'] ?></span>
         
     </form>
 </main>

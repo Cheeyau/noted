@@ -8,18 +8,19 @@
 
         // initiate user view with data
         public function index() {
-            $infoData = [];
-            $this->view('pages/index', $infoData);
+            $data = [];
+            $this->view('pages/index', $data);
         }
         
+        // get users from db
         public function getUserCon() {
             $users = $this->userModel->getUsersModel();
-            $infoData = ['users' => $users, 'errorMess' =>''];
-            $this->view('/pages/users', $infoData);
+            $data = ['users' => $users, 'errorMess' =>''];
+            $this->view('/pages/users', $data);
         }
-        
+        // Edit logged in user information
         public function editUser() {
-            $infoData = [
+            $data = [
                 'userId' => $_SESSION['userId'],
                 'userRoll' => $_SESSION['userRoll'],
                 'userName' => $_SESSION['userName'],
@@ -27,40 +28,42 @@
                 'errorMess' => ''
             ];
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // check name and validation
                 if(empty($_POST['inputName'])) {
-                    $infoData['errorMess'] = "Please enter a new name to change.";
+                    $data['errorMess'] = "Please enter a new name to change.";
                 } else {
                     $_POST['inputName'] = filterString($_POST['inputName']);
                     if($_POST['inputName']=== false) {
-                        $infoData['errorMess'] = "Please enter a valid new name to change.";
+                        $data['errorMess'] = "Please enter a valid new name to change.";
                     } else {
-                        $infoData['userName'] = trim($_POST['inputName']);
-                        
+                        $data['userName'] = trim($_POST['inputName']);
+                        // check email and validation
                         if(empty($_POST['inputEmail'])) {
-                            $infoData['errorMess'] = "Please enter a new name to change.";
+                            $data['errorMess'] = "Please enter a new name to change.";
                         } else {
                             $_POST['inputEmail'] = filterEmail($_POST['inputEmail']);
                             if($_POST['inputEmail']=== false) {
-                                $infoData['errorMess'] = "Please enter a valid new name to change.";
+                                $data['errorMess'] = "Please enter a valid new name to change.";
                             } else {
-                                $infoData['userEmail'] = trim($_POST['inputEmail']);
-
+                                $data['userEmail'] = trim($_POST['inputEmail']);
+                                // check password and validation
                                 if(empty($_POST['inputPassword'])) {
-                                    $infoData['errorMess'] = "Please enter a new password to change.";
+                                    $data['errorMess'] = "Please enter a new password to change.";
                                 } else {
                                     $_POST['inputPassword'] = filterString($_POST['inputPassword']);
                                     if($_POST['inputPassword']=== false) {
-                                        $infoData['errorMess'] = "Please enter a valid new password to change.";
+                                        $data['errorMess'] = "Please enter a valid new password to change.";
                                     } else {
                                         $tempPassword = trim($_POST['inputPassword']);
+                                        // hash password and send to db
                                         $hashPassword = $this->hashPassword($tempPassword.$_SESSION['userSalt']);
                                         
-                                        $tempEditUser = $this->userModel->updateUserModel($infoData['userId'], $infoData['userName'], $infoData['userEmail'], $hashPassword);
+                                        $tempEditUser = $this->userModel->updateUserModel($data['userId'], $data['userName'], $data['userEmail'], $hashPassword);
                                         if($tempEditUser === true) {
-                                            $infoData['errorMess'] = "The changes is saved.";
-                                            $this->setSession($infoData, $hashPassword);
+                                            $data['errorMess'] = "The changes is saved.";
+                                            $this->setSession($data, $hashPassword);
                                         } else {
-                                            $infoData['errorMess'] = 'Something went wrong, please try again.';
+                                            $data['errorMess'] = 'Something went wrong, please try again.';
                                         }
                                     }
                                 }
@@ -70,7 +73,7 @@
                     }
                 }
             }
-            $this->view('pages/editUser', $infoData);
+            $this->view('pages/editUser', $data);
         }
         // Set user session
         private function setSession($user, string $hashPassword) {
@@ -82,9 +85,9 @@
         public function hashPassword(string $passwordAndSalt) {
             return hash('sha512', $passwordAndSalt);
         }
-
+        // search user on input; name, email or registration date
         public function searchUserCon() {
-            $infoData = [ 'users' => '', 'errorMess'=> ''];
+            $data = [ 'users' => '', 'errorMess'=> ''];
             if($_SERVER['REQUEST_METHOD'] === 'GET') { 
                 if(
                     !empty($_GET['inputDay']) && 
@@ -96,12 +99,12 @@
                     $tempDate = $_GET['inputYear'] . '-' . $tempMonth . '-' . $tempDay;
                     $tempDate = filterString($tempDate);
                     if($tempDate === false) {
-                        $infoData['errorMess'] = "Please enter a valid date.";
+                        $data['errorMess'] = "Please enter a valid date.";
                     } else {
-                        $infoData['users'] = $this->userModel->searchUserRegistrationModel($tempDate);
-                        if($infoData['users'] === false) {
-                            $infoData['errorMess'] = 'There are no users found.';
-                            $infoData['users'] = '';
+                        $data['users'] = $this->userModel->searchUserRegistrationModel($tempDate);
+                        if($data['users'] === false) {
+                            $data['errorMess'] = 'There are no users found.';
+                            $data['users'] = '';
                         }
                     }
                 }
@@ -115,12 +118,12 @@
                     $tempName = $_GET['inputName'];
                     $tempName = filterString($tempName);
                     if($tempName === false) {
-                        $infoData['errorMess'] = "Please enter a valid name.";
+                        $data['errorMess'] = "Please enter a valid name.";
                     } else {
-                        $infoData['users'] = $this->userModel->searchUserNameModel($tempName);
-                        if($infoData['users'] === false) {
-                            $infoData['errorMess'] = 'There are no users found.';
-                            $infoData['users'] = '';
+                        $data['users'] = $this->userModel->searchUserNameModel($tempName);
+                        if($data['users'] === false) {
+                            $data['errorMess'] = 'There are no users found.';
+                            $data['users'] = '';
                         }
                     }
                 }
@@ -134,18 +137,18 @@
                     $tempEmail = $_GET['inputEmail'];
                     $tempEmail = filterString($tempEmail);
                     if($tempEmail === false) {
-                        $infoData['errorMess'] = "Please enter a valid Email.";
+                        $data['errorMess'] = "Please enter a valid Email.";
                     } else {
-                        $infoData['users'] = $this->userModel->searchUserEmailModel($tempEmail);
-                        if($infoData['users'] === false) {
-                            $infoData['errorMess'] = 'There are no users found.';
-                            $infoData['users'] = '';
+                        $data['users'] = $this->userModel->searchUserEmailModel($tempEmail);
+                        if($data['users'] === false) {
+                            $data['errorMess'] = 'There are no users found.';
+                            $data['users'] = '';
                         }
                     }
                 }
                 
              }
             
-            $this->view('/pages/users', $infoData);
+            $this->view('/pages/users', $data);
         }
     }

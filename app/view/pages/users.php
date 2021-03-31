@@ -28,7 +28,7 @@
                 <input class="searchDateYear" type="text" name="inputYear" placeholder="<?php echo date('Y'); ?>">
                 
                 <button type="submit" value="submit">Search</button>
-                <span class="error " ><?php echo $infoData['errorMess'] ?></span>
+                <span class="error " ><?php echo $data['errorMess'] ?></span>
             </form>
         </section>
         <h2 class="row col-sm-12 align-self-center">Here are the users in the system.</h2>
@@ -41,8 +41,9 @@
                     <th class="col-sm-2">User Roll</th>
                 </tr>
             <?php 
-                if($infoData['users'] !== '') {
-                    foreach($infoData['users'] as $user) {
+                // loop trough users after checking if array is empty
+                if($data['users'] !== '') {
+                    foreach($data['users'] as $user) {
                 
                     ?>
                     <tr class="row col-sm-8">
@@ -52,6 +53,7 @@
                         <td class="col-sm-1"><?php echo $user->Notes ?></td>
                         <td class="col-sm-2">
                             <?php 
+                                // show user roll
                                 if($user->UserRoll == 0) {
                                     echo 'User';
                                 }

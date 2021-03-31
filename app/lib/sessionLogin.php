@@ -8,7 +8,7 @@
             return false;
         }
     }
-    
+    // start session
     function startSession() {
         session_start();
     }

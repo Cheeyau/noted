@@ -9,7 +9,7 @@
         <label class="row " for="inputMail">Email: </label>
         <input class="row " type="text" name="inputPassword" id="inputPassword">
         
-        <span class="error " ><?php echo $infoData["errorMess"] ?></span>
+        <span class="error " ><?php echo $data["errorMess"] ?></span>
         <button class="row " type="submit" value="submit">send</button>
         
         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">

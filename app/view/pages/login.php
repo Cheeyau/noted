@@ -11,7 +11,7 @@
         <label class="row " for="inputPassword">Password: </label>
         <input class="row " type="password" name="userPassword" id="inputPassword">
         <button class="row " type="submit" value="submit">Login</button>
-        <span class="error " ><?php echo $infoData['errorMess'] ?></span>
+        <span class="error " ><?php echo $data['errorMess'] ?></span>
         
         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
     </form>

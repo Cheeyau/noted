@@ -1,6 +1,6 @@
 <?php
-    require_once APPROOT . '/view/head/head.php';
-    require_once APPROOT . '/view/head/nav.php';
+    require APPROOT . '/view/head/head.php';
+    require APPROOT . '/view/head/nav.php';
 ?>
 
 <main class="container align-self-center ">    
@@ -21,12 +21,12 @@
             </form>
         </section>
     </section>
-    <span class="error " ><?php echo $infoData["errorMess"] ?></span>
+    <span class="error " ><?php echo $data["errorMess"] ?></span>
     <section class="row">
         <h1 class="row col-sm-12 align-self-center">Here are the notes that you made.</h1>
         <?php
             // check for which background is checked
-            foreach ($infoData['notes'] as $note) {
+            foreach ($data['notes'] as $note) {
                 switch($note->ColorId) {
                     case 0:
                         echo '<section class="col-sm note backgroundGreen">';

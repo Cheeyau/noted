@@ -9,7 +9,7 @@ class AutoLoader {
     }
 
     // load view and data for in the view
-    public function view($nameView, $infoData = []) {
+    public function view($nameView, $data = []) {
         if (file_exists('../app/view/' . $nameView . '.php')) {
             require_once '../app/view/' . $nameView . '.php';
         } else {
