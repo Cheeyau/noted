@@ -40,7 +40,7 @@
             $addWildCard = $date . '%';
             $this->db->bindDateTime(':date', $addWildCard);
             $result = $this->db->resultSet();            
-            if($this->db->rowCount() > 0) {
+            if($this->db->rowCount() > 0 && $result !== null) {
                 return $result;
             } else {
                 false;
@@ -56,7 +56,7 @@
             $addWildCard = $name . '%';
             $this->db->bindString(':name', $addWildCard);
             $result = $this->db->resultSet();            
-            if($this->db->rowCount() > 0) {
+            if($this->db->rowCount() > 0 &&  $result !== null) {
                 return $result;
             } else {
                 false;
@@ -72,7 +72,7 @@
             $addWildCard = $name . '%';
             $this->db->bindString(':email', $addWildCard);
             $result = $this->db->resultSet();            
-            if($this->db->rowCount() > 0) {
+            if($this->db->rowCount() > 0 &&  $result !== null) {
                 return $result;
             } else {
                 false;

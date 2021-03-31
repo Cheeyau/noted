@@ -90,6 +90,20 @@
             $data = [ 'users' => '', 'errorMess'=> ''];
             if($_SERVER['REQUEST_METHOD'] === 'GET') { 
                 if(
+                    empty($_GET['inputEmail']) && 
+                    empty($_GET['inputDay']) && 
+                    empty($_GET['inputDay']) && 
+                    empty($_GET['inputYear']) &&
+                    empty($_GET['inputName'])
+                ) {
+                    $data['users'] = $this->userModel->getUsersModel();
+                    if($data['users'] === false || empty($data['users'])) {
+                        $data['errorMess'] = 'There are no users found.';
+                        $data['users'] = '';
+                    }
+                }
+                
+                if(
                     !empty($_GET['inputDay']) && 
                     !empty($_GET['inputDay']) && 
                     !empty($_GET['inputYear']) 
@@ -102,7 +116,7 @@
                         $data['errorMess'] = "Please enter a valid date.";
                     } else {
                         $data['users'] = $this->userModel->searchUserRegistrationModel($tempDate);
-                        if($data['users'] === false) {
+                        if($data['users'] === false || empty($data['users'])) {
                             $data['errorMess'] = 'There are no users found.';
                             $data['users'] = '';
                         }
@@ -121,7 +135,7 @@
                         $data['errorMess'] = "Please enter a valid name.";
                     } else {
                         $data['users'] = $this->userModel->searchUserNameModel($tempName);
-                        if($data['users'] === false) {
+                        if($data['users'] === false || empty($data['users'])) {
                             $data['errorMess'] = 'There are no users found.';
                             $data['users'] = '';
                         }
@@ -140,15 +154,13 @@
                         $data['errorMess'] = "Please enter a valid Email.";
                     } else {
                         $data['users'] = $this->userModel->searchUserEmailModel($tempEmail);
-                        if($data['users'] === false) {
+                        if($data['users'] === false || empty($data['users'])) {
                             $data['errorMess'] = 'There are no users found.';
                             $data['users'] = '';
                         }
                     }
-                }
-                
+                }  
              }
-            
             $this->view('/pages/users', $data);
         }
     }

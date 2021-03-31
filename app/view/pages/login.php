@@ -1,6 +1,6 @@
 <?php
     require APPROOT . '/view/head/head.php';
-    require_once APPROOT . '/view/head/captchaHead.php';
+    require APPROOT . '/view/head/captchaHead.php';
     require APPROOT . '/view/head/nav.php';
 ?>
 <main class="container align-self-center ">    
@@ -20,6 +20,5 @@
     </button>
     <button type="button">
         <a href="<?php echo URLROOT ?>/LoginController/resetPasswordPage">Forgot your password? Reset it here!</a>
-        
     </button>
 </main>

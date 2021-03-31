@@ -1,4 +1,4 @@
-
+</head>
 <nav>
     <ul>
         <?php 

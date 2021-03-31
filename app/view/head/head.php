@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="EN">
     <head>
@@ -15,4 +14,4 @@
         <!-- JQuery -->
         <script data-require="jquery@2.1.4" data-semver="2.1.4" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="<?php echo URLROOT ?>/public/js/jquery.ns-autogrow-1.1.6/dist/jquery.ns-autogrow.min.js"></script>
-    </head>
+    

@@ -42,7 +42,7 @@
                 </tr>
             <?php 
                 // loop trough users after checking if array is empty
-                if($data['users'] !== '') {
+                if($data['users'] !== '' || !empty($data['users'])) {
                     foreach($data['users'] as $user) {
                 
                     ?>
