@@ -1,40 +1,41 @@
 </head>
-<nav>
-    <ul>
+<nav class="row">
+    <ul class="nav">
         <?php 
             // check if use login for redirect to login
             if(!isset($_SESSION['userId'])) {
-                echo '</li><h1 class="row col-sm-6"><a href="';
+                echo '<li><h1 class="nav-item"><a class="nav-link" href="';
                 echo URLROOT . '/LoginController/login';
-                echo '">Noted!</a></h1></li>';
+                echo '">Login</a></h1></li>';
             }
             // check if use login for redirect to dashboard
             if(isset($_SESSION['userId'])) {
-                echo '<li><a href="';
+                echo '<li class="nav-item"><a class="nav-link" href="';
                 echo URLROOT . '/IndexController/index';
-                echo '">Noted!</a></li>';
+                echo '">Home</a></li>';
                 
-                echo '<li><a href="';
+                echo '<li><a class="nav-link" href="';
                 echo URLROOT . '/NoteController/index';
                 echo '">Notes</a></li>';
                 
                 // check if use login us admin
                 if (isset($_SESSION['userRoll'])) {
                     if ($_SESSION['userRoll'] == 1 || $_SESSION['userRoll'] == 2) {
-                        echo '<li><a href="';
+                        echo '<li class="nav-item"><a class="nav-link" href="';
                         echo URLROOT . '/UserController/getUserCon'. '">Users';
                         echo "</a></li>";
                     }
                 }
-                echo '<li><a href="';
+                echo '<li class="nav-item"><a class="nav-link" href="';
                 echo URLROOT . '/UserController/editUser">';
                 echo $_SESSION['userName'].'</a></li>';
 
                 // logout button
-                echo "<li><form action=";
-                echo URLROOT . '/LoginController/logout method="POST">';
-                echo '<button type="submit" name="submit">Log out</button></form></li>';
+                echo '<li class="nav-item"><form action="';
+                echo URLROOT . '/LoginController/logout" method="POST">';
+                echo '<button class="btn-primary btn-sm" type="submit" name="submit">Log out</button></form></li>';
             }
         ?> 
     </ul>
 </nav>
+<body class="container">

@@ -10,6 +10,7 @@
     }
     // start session
     function startSession() {
+        if(!isset($_SESSION['userId'])) 
         session_start();
     }
     

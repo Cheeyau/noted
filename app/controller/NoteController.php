@@ -9,7 +9,7 @@
         }
         // Get notes from user by id from the db
         public function getNotesCon() {
-            $notes =  $this->noteModel->getNotesModel($_SESSION['userId']);
+            $notes =  $this->noteModel->getNotesModel((int)$_SESSION['userId']);
             $data = ['notes' => $notes, 'errorMess' => '']; 
             $this->view('/pages/note', $data);
         }

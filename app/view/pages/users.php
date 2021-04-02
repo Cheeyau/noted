@@ -3,31 +3,33 @@
     require APPROOT . '/view/head/nav.php';
 ?>
 
-<main class="container align-self-center ">    
+<main class="row align-self-center ">    
     <section class="row">
-        <h1 class="row col-sm-12 align-self-center">Here are all the users who are regristrated!</h1>
+        <h1 class="row col-sm-12 align-self-center H1">Here are all the users who are regristrated!</h1>
         <h2 class="row col-sm-12 align-self-center">Search uers by name, email address or registration date.</h2>
         <section class="row col-sm-10 searchBar"> 
             <form action="<?php echo URLROOT ?>/UserController/searchUserCon" method="GET">
                 <section class="row">
                     <label class="col-sm-3" for="inputName">Name: </label>
-                    <input class="col-sm-3" type="text" name="inputName" >        
+                    <input class="col-sm-3 form-control" type="text" name="inputName" >        
                 </section>
                 <section class="row">
                     <label class="col-sm-3" for="inputEmail">Email: </label>
-                    <input class="col-sm-3" type="text" name="inputEmail">
+                    <input class="col-sm-3 form-control" type="text" name="inputEmail">
                 </section>
-                <label class="col-sm-3" for="inputRegistration">Registration date: </label>
-                <label for="inputRegistration">Day: </label>
-                <input class="searchDate" type="text" name="inputDay" placeholder="<?php echo date('d'); ?>">
-                
-                <label for="inputRegistration">Month: </label>
-                <input class="searchDate" type="text" name="inputMonth" placeholder="<?php echo date('m'); ?>">
-                
-                <label for="inputRegistration">Year: </label>
-                <input class="searchDateYear" type="text" name="inputYear" placeholder="<?php echo date('Y'); ?>">
-                
-                <button type="submit" value="submit">Search</button>
+                <section class="row">
+                    <label class="col-sm-2" for="inputRegistration">Registration date: </label>
+                    <label class="col-sm-1" for="inputRegistration">Day: </label>
+                    <input class="searchDate form-control" type="text" name="inputDay" placeholder="<?php echo date('d'); ?>">
+                    
+                    <label class="col-sm-1" for="inputRegistration">Month: </label>
+                    <input class="searchDate form-control" type="text" name="inputMonth" placeholder="<?php echo date('m'); ?>">
+                    
+                    <label class="col-sm-1" for="inputRegistration">Year: </label>
+                    <input class="searchDateYear form-control" type="text" name="inputYear" placeholder="<?php echo date('Y'); ?>">
+                    
+                </section>
+                <button class="btn-primary btn-sm" type="submit" value="submit">Search</button>
                 <span class="error " ><?php echo $data['errorMess'] ?></span>
             </form>
         </section>

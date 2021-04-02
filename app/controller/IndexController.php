@@ -9,8 +9,10 @@
                 $data = [];
                 $this->view('pages/dashboard', $data);
             } else {
-                header('location: ' . URLROOT . '/LoginController/login');
-                exit();
+                $this->view('pages/login', $data = []);
+                // // // Working in test environment but not in live  
+                // header('location: ' . URLROOT . '/LoginController/login');
+                // exit();
             }
         }
     }

@@ -8,12 +8,11 @@
     --gotB:gothamBold;
   }
   
-  
-  body {
-    display: flex;
-    margin: 0;
-    padding: 0;
+  .H1 {
+    font-size: 3em;
+    font-weight: bold;
   }
+  
   
 .note {
   flex-wrap: wrap;
@@ -34,6 +33,13 @@
   -moz-box-shadow: none;
   box-shadow: none;
   resize: none;
+}
+.radioBtn {
+  margin-right: 5px;
+}
+
+.radioLbl {
+  margin-right: 12px;
 }
 
 .backgroundGreen {
@@ -70,9 +76,18 @@
 }
 
 .searchDate {
-  max-width: 30px;
+  max-width: 50px;
 }
 
 .searchDateYear {
-  max-width: 50px;
+  max-width: 80px;
+}
+
+.btnLogin {
+
+  margin-top: 50px;
+}
+
+.btnLogin a {
+  color: #fff;
 }

@@ -30,18 +30,21 @@
         }
         // log out user
         public function logout() {
+            $data = [];
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                if(isset($_SESSION['userId'])) {
-                    session_destroy();
-                    setcookie('userId', null, -1, '/'); 
-                    unset($_COOKIE['userId']); 
-                    header("Cache-Control: no-cache, must-revalidate");
-                    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-                    header("Content-Type: application/xml; charset=utf-8");
-                    header('location: ' . URLROOT . '/LoginController/login');
-                    exit();
-                } 
+                // if(isset($_SESSION['userId'])) {
+                    // // Working in test environment but not in live  
+                    // header("Cache-Control: no-cache, must-revalidate");
+                    // header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+                    // header("Content-Type: application/xml; charset=utf-8");
+                    // header('location: ' . URLROOT . '/LoginController/login');
+                    // exit();
+                // } 
+                unset($_COOKIE['userId']); 
+                unset($_SESSION['userId']); 
+                session_destroy();
             }
+            $this->view('/pages/login', $data);
         }
         // login validation
         public function login() {
@@ -73,7 +76,7 @@
                                         // push user to db layer 
                                         $data['userPass'] = trim($_POST['userPassword']);
                                         $tempUser = $this->loginModel->checkLoginModel($data['userName'], $data['userPass']);
-                                        if (!$tempUser == false) {
+                                        if ($tempUser !== false || $tempUser === null) {
                                             $this->setSession($tempUser);
                                         } else {
                                             $data['errorMess'] = "The password and user combination is not valid.";
@@ -86,7 +89,9 @@
                         $data['errorMess'] = "The captcha failed, please try again.";
                     }
                 }
-            } 
+            } else {
+                $data['errorMess'] = "The captcha failed, please try again.";
+            }
             $this->view('/pages/login', $data);
         }
 
@@ -98,12 +103,14 @@
             $_SESSION["userPass"] = $user->Password;
             $_SESSION["userSalt"] = $user->Salt;
             $_SESSION["userRoll"] = $user->UserRoll;
-            header('location:' . URLROOT . '/IndexController/index');
-            exit();
+            $this->view('/pages/dashboard', $infodata = []);
+            // // Working in test environment but not in live  
+            // header('location:' . URLROOT . '/IndexController/index');
+            die();
         }
 
         // register user
-        public function registerUser() {
+        public function registerUserCon() {
             $data = $this->emptyData();
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['recaptcha_response'])) {
                 // recaptcha check
@@ -121,7 +128,7 @@
                             } else {
                                 $data['userName'] = trim($_POST['userName']);
                                 // empty email
-                                if(empty($_POST["userEmail"])) {
+                                if(empty($_POST['userEmail'])) {
                                     $data['errorMess'] = "Please enter your email."; 
                                 } else {
                                     $_POST['userEmail'] = filterEmail($_POST['userEmail']);
@@ -147,7 +154,7 @@
                                                     $data['userPass'],
                                                     $tempSalt
                                                 );
-                                                if (!$tempUser === false) {
+                                                if ($tempUser !== false || $tempUser !== null) {
                                                     $this->setSession($tempUser);
                                                 } else {
                                                     $data['errorMess'] = "Something went wrong, please try it again";
@@ -163,8 +170,10 @@
                         $data['errorMess'] = "The captcha failed, please try again.";
                     }
                 }
-            $this->view('/pages/registerUser', $data);
-        }        
+            } else {
+                $data['errorMess'] = "The captcha failed, please try again.";
+            }    
+        $this->view('/pages/registerUser', $data);
     }
     // generate random salt
     private function saltShaker() {
